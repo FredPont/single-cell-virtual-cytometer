@@ -1,0 +1,16 @@
+.tile_box_style {
+    margin:10px; 
+    box-shadow:10px 5px 5px gray; 
+    border-width: 2px ;
+    border-style: solid;
+    
+}
+
+.button_container .button {
+    margin: 5px
+}
+
+
+#densplot,#graph2 {
+    padding:10px 50px;
+}
