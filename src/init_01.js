@@ -93,4 +93,5 @@ function initMapCluster() {
     var e2 = document.getElementById("clusterNB");
     var clustNB = e2.value;
     console.log(ClustName, clustNB)
+    plotCluster("red", ClustName, clustNB)
 }
