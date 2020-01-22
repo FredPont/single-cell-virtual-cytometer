@@ -69,7 +69,7 @@ function initMapXY() {
     var xName = e.options[e.selectedIndex].value;
     var e2 = document.getElementById("Ymap");
     var yName = e2.options[e2.selectedIndex].value;
-    var e = document.getElementById("ListeP1");
+    //var e = document.getElementById("ListeP1");
     
     // return if only one coordinate is selectec
     if (xName == '-- Select X --' || yName == '-- Select Y --')  {
@@ -85,4 +85,12 @@ function initMapXY() {
     window.tsne1 = xName
     window.tsne2 = yName
     
+}
+
+function initMapCluster() {
+    var e = document.getElementById("Cluster");
+    var ClustName = e.options[e.selectedIndex].value;
+    var e2 = document.getElementById("clusterNB");
+    var clustNB = e2.value;
+    console.log(ClustName, clustNB)
 }

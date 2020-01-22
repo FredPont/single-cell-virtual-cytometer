@@ -105,6 +105,7 @@ function showLists(header){
     var d2=document.FormP2.ListeP2; 
     var d3=document.FormP3.Xmap; 
     var d4=document.FormP4.Ymap; 
+    var d5=document.FormP5.Cluster;
     var L =  header.length
     for (var i=1; i < L; i++){ //remove first column with cells ID
         d.length++; 
@@ -119,14 +120,11 @@ function showLists(header){
         d4.length++;
         d4.options[i].text = header[i].replace(/_/g, " "); // replace _ by space
         d4.options[i].value = header[i]
+        d5.length++;
+        d5.options[i].text = header[i].replace(/_/g, " "); // replace _ by space
+        d5.options[i].value = header[i]
     }
 
-    // var d2=document.FormP2.ListeP2; 
-    // for (var i=1; i < L; i++){ //remove first column with cells ID
-    //     d2.length++; 
-    //     d2.options[i].text = header[i].replace(/_/g, " "); // replace _ by space
-    //     d2.options[i].value = header[i]
-    // }  
 } 
 
 
