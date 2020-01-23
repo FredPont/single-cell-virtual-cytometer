@@ -7,14 +7,13 @@ function plotCluster(ClustName, clustNB){
     var clusterVal = colValues[ClustName]
    
     var layerColor = ClustColors(clusterVal, clustNB)
-    //var layerColor = colValues[ClustName]
 
-    /*
-    if (legend == "") {
-      legend = userPar1 + " + " + userPar2
-    }
-    */
-
+    clustCenter =  ClustCenters(ClustName)
+    xlabel = clustCenter[0] 
+    ylabel = clustCenter[1] 
+    labels = clustCenter[2]  
+    console.log(xlabel,ylabel,labels)
+    
     var trace1 = {
         x: tsne1,
         y: tsne2,
@@ -30,10 +29,10 @@ function plotCluster(ClustName, clustNB){
       };
 
       var plotAnot = {
-        x: [1,10],
-        y: [1,10],
+        x: xlabel,
+        y: ylabel,
         mode: "text",
-        text: ["12", "5"],
+        text: labels,
         type: "scattergl",
         textfont: {
           family: 'Courier New, monospace',
@@ -44,19 +43,7 @@ function plotCluster(ClustName, clustNB){
 
       //setDotSize1() // set dot size of t-SNE graph
       dotsize1 = window.dotsize1
-      /*var trace2 = {
-        x: x2,
-        y: y2,
-        type: 'scattergl',
-        mode: "markers",
-        name : legend, 
-        marker: {
-          color: layerColor,
-          size: dotsize1,
-          opacity: 1
-        }
-      };
-      */
+     
       //var data = [trace1, trace2];
       var data = [trace1, plotAnot];
 
@@ -220,7 +207,7 @@ function ClustCenters(ClustName) {
   var dict = {};
 
   for (var i = 0; i < clustLen; i++){
-    dict[uniqueVal[i]] = {xmin:null, xmax:null, ymin:null, ymax:null, xcenter:null, ycenter:null }
+    dict[uniqueVal[i]] = {x:[], y:[], xcenter:null, ycenter:null }
   }
 
   // fill dict of cluster objets
@@ -229,36 +216,52 @@ function ClustCenters(ClustName) {
     x = tsne1[i]
     y = tsne2[i]
     clustN = clusterVal[i]
-
-    // if dict is empty fill it with 1st value
-    if (dict[clustN].xmin == null){
-      dict[clustN].xmin = x
-      dict[clustN].xmax = x
-      dict[clustN].ymin = y
-      dict[clustN].ymax = y
-      dict[clustN].xcenter = x
-      dict[clustN].ycenter = y
-    } else {
-      if (x < dict[clustN].xmin){
-        dict[clustN].xmin = x
-      }
-      if (x > dict[clustN].xmax){
-        dict[clustN].xmax = x
-      }
-      if (y < dict[clustN].ymin){
-        dict[clustN].ymin = y
-      }
-      if (y > dict[clustN].ymax){
-        dict[clustN].ymax = y
-      }
-      dict[clustN].xcenter = center(dict[clustN].xmin, dict[clustN].xmax)
-      dict[clustN].ycenter = center(dict[clustN].ymin, dict[clustN].ymax)
-    }
-
+    dict[clustN].x.push(x)
+    dict[clustN].y.push(y)
   }
-  console.log(dict)
+  // iterate over dict to compute the median of x,y
+  // and store the results in x,y, clustnb array to be plotted
+  //var CenterClust = {};
+  x = [];
+  y = [];
+  labels = [];
+  Object.keys(dict).forEach(function(key) {
+      x.push(median(dict[key].x))
+      y.push(median(dict[key].y))
+      labels.push(key)
+    //CenterClust[key] = {xcenter: median(dict[key].x), ycenter: median(dict[key].y)} ;
+  });
+  //console.log(CenterClust)
+  return [x,y,labels]
 }
 
-function center(a,b){
-  return (a+b)/2
-}
+
+// credits : https://stackoverflow.com/questions/45309447/calculating-median-javascript
+function median(arr) {
+    const L = arr.length, halfL = L/2;
+    if (L % 2 == 1)
+       return quickselect(arr, halfL);
+    else
+       return 0.5 * (quickselect(arr, halfL - 1) + quickselect(arr, halfL));
+ }
+ 
+ function quickselect(arr, k) {
+    // Select the kth element in arr
+    // arr: List of numerics
+    // k: Index
+    // return: The kth element (in numerical order) of arr
+    if (arr.length == 1)
+       return arr[0];
+    else {
+       const pivot = arr[0];
+       const lows = arr.filter((e)=>(e<pivot));
+       const highs = arr.filter((e)=>(e>pivot));
+       const pivots = arr.filter((e)=>(e==pivot));
+       if (k < lows.length) // the pivot is too high
+          return quickselect(lows, k);
+       else if (k < lows.length + pivots.length)// We got lucky and guessed the median
+          return pivot;
+       else // the pivot is too low
+          return quickselect(highs, k - lows.length - pivots.length);
+    }
+ }

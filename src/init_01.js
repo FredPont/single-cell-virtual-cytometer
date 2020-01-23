@@ -92,6 +92,11 @@ function initMapCluster() {
     var ClustName = e.options[e.selectedIndex].value;
     var e2 = document.getElementById("clusterNB");
     var clustNB = e2.value;
-    console.log(ClustName, clustNB)
-    plotCluster("red", ClustName, clustNB)
+    //console.log(ClustName, clustNB)
+    if (clustNB == ""){
+        clustNB = -1    // to display all the clusters
+    }
+    
+    plotCluster(ClustName, clustNB) // plot the map with colored clusters
+    window.clusterMap = true
 }

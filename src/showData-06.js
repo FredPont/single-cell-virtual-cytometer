@@ -376,7 +376,10 @@ function setDotSizeTSNE() {
   //progBar() // progress bar
   var e = document.getElementById("dotSizeTSNE");
   var dotsizeTSNE = e.options[e.selectedIndex].value;
-  window.dotsizeTSNE = dotsizeTSNE 
+  window.dotsizeTSNE = dotsizeTSNE
+  if (window.clusterMap == true){
+    initMapCluster()
+  }
   refreshTSNE()
 }
 

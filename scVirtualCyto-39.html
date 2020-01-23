@@ -20,7 +20,7 @@
     <script src="src/freezeGate_01.js"></script>
     <script src="src/overlayCells-01.js"></script>
     <script src="src/quadrantsGate_01.js"></script>
-    <script src="src/plotCluster_01.js"></script>
+    <script src="src/plotCluster_02.js"></script>
 </head>
 
 <body>
@@ -141,12 +141,7 @@
                             </form>
                         </div>
                     </div>
-                </div>
-                <div class="field">
-                    <div class="control">
-                      <input class="input is-primary" type="text" id="clusterNB" placeholder="cluster to display">
-                    </div>
-                </div>
+                </div> 
                 <div class="field">
                  
                     <div class="control">
@@ -157,6 +152,11 @@
                                 </select>
                             </form>
                         </div>
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="control">
+                      <input class="input is-primary" type="text" id="clusterNB" placeholder="cluster to display" onchange="initMapCluster();">
                     </div>
                 </div>
             </div>
