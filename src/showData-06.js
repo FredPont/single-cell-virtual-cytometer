@@ -379,8 +379,10 @@ function setDotSizeTSNE() {
   window.dotsizeTSNE = dotsizeTSNE
   if (window.clusterMap == true){
     initMapCluster()
+  } else {
+    refreshTSNE()
   }
-  refreshTSNE()
+  
 }
 
 function genColors() {

@@ -12,11 +12,11 @@ function plotCluster(ClustName, clustNB){
     xlabel = clustCenter[0] 
     ylabel = clustCenter[1] 
     labels = clustCenter[2]  
-    console.log(xlabel,ylabel,labels)
     
     var trace1 = {
         x: tsne1,
         y: tsne2,
+        
         hovertemplate: '<i>'+ ClustName + '</i>: ' + '<b>%{text}</b>',
         type: 'scattergl',
         mode: "markers" ,
@@ -25,7 +25,6 @@ function plotCluster(ClustName, clustNB){
           color: layerColor
         },
         text: clusterVal, // cluster nb is displayed when the mouse is over one dot
-        name : ""
       };
 
       var plotAnot = {
@@ -81,8 +80,8 @@ function plotCluster(ClustName, clustNB){
           x: 1.0,
           y: 1.3
         },
-        
-        //title:'t-SNE plot'
+        //name : "Cluster Number"
+        title: "Cluster Number"
       };
 
       initTSNE()  // initialisation of tSNE data to avoid merging tSNE data when stack = false
@@ -235,7 +234,8 @@ function ClustCenters(ClustName) {
   return [x,y,labels]
 }
 
-
+// ========================================================
+// median calculation
 // credits : https://stackoverflow.com/questions/45309447/calculating-median-javascript
 function median(arr) {
     const L = arr.length, halfL = L/2;
@@ -265,3 +265,80 @@ function median(arr) {
           return quickselect(highs, k - lows.length - pivots.length);
     }
  }
+// ========================================================
+
+// plot genes levels in cluster map
+ function plotGene(ClustName){
+    var colValues = window.colValues
+    var xName = window.tsne1
+    var yName = window.tsne2
+    var tsne1 = colValues[xName]
+    var tsne2 = colValues[yName]
+    var clusterVal = colValues[ClustName]
+   
+    //var layerColor = ClustColors(clusterVal, clustNB)
+
+    var trace1 = {
+        x: tsne1,
+        y: tsne2,
+        type: 'scattergl',
+        mode: "markers" ,
+        marker: {
+          size: window.dotsizeTSNE,
+          color: clusterVal,
+          //colorscale: 'Jet',
+          autocolorscale: true
+        },
+        //text: clusterVal, // cluster nb is displayed when the mouse is over one dot
+        name : ClustName
+      };
+
+      //setDotSize1() // set dot size of t-SNE graph
+      dotsize1 = window.dotsize1
+     
+      //var data = [trace1, trace2];
+      var data = [trace1];
+
+      var layout = {
+        width: 1000,
+        height: 550,
+        xaxis: {
+          showgrid : false,
+          zeroline: false,
+          range: [Math.min(tsne1), Math.max(tsne1)],
+          title: {
+            text: xName,
+            font: {
+              family: 'Courier New, monospace',
+              size: 18,
+              color: '#000000'
+            }
+          }
+        },
+        yaxis: {
+          showgrid : false,
+          zeroline: false,
+          range: [Math.min(tsne2), Math.max(tsne2)],
+          title: {
+            text: yName,
+            font: {
+              family: 'Courier New, monospace',
+              size: 18,
+              color: '#000000'
+            }
+          }
+        },
+        showlegend: true,
+        legend: {
+          x: 1.0,
+          y: 1.3
+        },
+        
+        //title:'t-SNE plot'
+      };
+
+      initTSNE()  // initialisation of tSNE data to avoid merging tSNE data when stack = false
+      Plotly.purge('graph2');
+      Plotly.react('graph2', data, layout);
+  
+}

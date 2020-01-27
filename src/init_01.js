@@ -84,9 +84,13 @@ function initMapXY() {
     window.CellstSNE = CellstSNE
     window.tsne1 = xName
     window.tsne2 = yName
+    // disable cluster map
+    window.clusterMap == false
     
 }
 
+// get cluster + clusters number or gene name to plot the cluster or the gene map
+// independantly of density plot
 function initMapCluster() {
     var e = document.getElementById("Cluster");
     var ClustName = e.options[e.selectedIndex].value;
@@ -96,7 +100,33 @@ function initMapCluster() {
     if (clustNB == ""){
         clustNB = -1    // to display all the clusters
     }
-    
-    plotCluster(ClustName, clustNB) // plot the map with colored clusters
-    window.clusterMap = true
+    var colValues = window.colValues
+    var clusterVal = colValues[ClustName]
+    //console.log(clusterVal)
+    var type = checkType(clusterVal)
+    if (type == "int"){
+        plotCluster(ClustName, clustNB) // plot the map with colored clusters
+        window.clusterMap = true
+    } else {
+        plotGene(ClustName)
+    }
+}
+
+// test if array type is float or integer
+function checkType(array) {
+    const L = array.length
+    const regex = /^[0-9]+$/;
+    const streg = /[a-zA-Z]/;
+    for (var i = 0; i < L; i++){
+        // test if array is integer
+        if (regex.test(array[i]) == false) {
+            if (streg.test(array[i]) == true){
+                alert("Strings such as", array[i], " cannot be plotted !")
+                throw new FatalError("execution aborted !");
+            } else {
+                return "float"
+            } 
+        }
+    }
+    return "int"
 }
