@@ -185,7 +185,7 @@ function ClustColors(clusterVal, clustNB) {
 }
 
 // this function compute the center of each cluster as if it was a rectangle
-// and take the mean(xmin,xmax) and the mean(ymin,ymax) as the center and
+// and take the median(xmin,xmax) and the median(ymin,ymax) as the center and
 // return an array with the centers
 function ClustCenters(ClustName) {
   var colValues = window.colValues
@@ -195,11 +195,6 @@ function ClustCenters(ClustName) {
   var tsne2 = colValues[yName]
   var clusterVal = colValues[ClustName]
 
-  //var cluster = new Object(); // cluster number, xmin,xmax,ymin,ymax, and center
-  var clustArray = []  // array of cluster dict of objects
-
-  
-  
   // create empty dict of cluster dict of objects. cluster value => cluster object
   var uniqueVal = Array.from(new Set(clusterVal))
   var clustLen = uniqueVal.length

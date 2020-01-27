@@ -21,6 +21,8 @@
     <script src="src/overlayCells-01.js"></script>
     <script src="src/quadrantsGate_01.js"></script>
     <script src="src/plotCluster_02.js"></script>
+    <script src="src/statistics_01.js"></script>
+    <script src="src/math.min.js"></script>
 </head>
 
 <body>
@@ -188,6 +190,7 @@
                         <button class="button" value="Quadrants Off" id="quadgate" onclick="quadranGate();"  disabled>Quadrants Off</button>
                         <a class="button is-warning" id="PNGoverlay" onclick="PNGoverlayExport();">PNG</a>
                         <a class="button is-info" style="background: rgb(80, 200, 230);" onclick="exportQuadranCells('quadrants.csv');">Export Quadrant</a>
+                        <a class="button is-info" style="background: rgb(80, 200, 230);" onclick="exportStatistics('stats.txt');">Export Stats</a>
                     </div>
             </div>
                 <div class="tile">

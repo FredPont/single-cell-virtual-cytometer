@@ -90,8 +90,14 @@
         nbCells++
       });
 
+      window.brushedX = x // x coordinates of brushed cells
+      window.brushedY = y // y coordinates of brushed cells
       selCellNames = selectedCellNames(x, y, x1, y1)
       window.selCellNames = selCellNames
+
+      //console.log(window.selCellNames)
+      //console.log(window.gateCellNames)
+
       // dictionnary cellNames => [tSNE1,tSNE2]
       CellstSNE = window.CellstSNE
 

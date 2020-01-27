@@ -63,3 +63,18 @@ function exportQuadranCells(name) {
   a.click();
   document.body.removeChild(a);
 }
+
+function exportStatistics(name) {
+
+  progBar() // progress bar
+  table = formatStat()  
+
+  var a = document.createElement("a");
+  document.body.appendChild(a)
+  var file = new Blob([table], {type: 'text/plain'});
+  a.href = URL.createObjectURL(file);
+  a.download = name;
+  a.style.display = "none";
+  a.click();
+  document.body.removeChild(a);
+}
