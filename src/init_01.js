@@ -91,7 +91,8 @@ function initMapXY() {
 
 // get cluster + clusters number or gene name to plot the cluster or the gene map
 // independantly of density plot
-function initMapCluster() {
+function initMapCluster(markerType) {
+    var dataLayout = [] // array containing the data and layout of the plot
     var e = document.getElementById("Cluster");
     var ClustName = e.options[e.selectedIndex].value;
     var e2 = document.getElementById("clusterNB");
@@ -105,11 +106,13 @@ function initMapCluster() {
     //console.log(clusterVal)
     var type = checkType(clusterVal)
     if (type == "int"){
-        plotCluster(ClustName, clustNB) // plot the map with colored clusters
+        dataLayout = plotCluster(ClustName, clustNB, markerType) // plot the map with colored clusters
         window.clusterMap = true
     } else {
-        plotGene(ClustName)
+        dataLayout = plotGene(ClustName, markerType)    // plot the map with genes/other columns values
     }
+
+    return dataLayout
 }
 
 // test if array type is float or integer

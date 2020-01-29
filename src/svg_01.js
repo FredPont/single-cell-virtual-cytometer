@@ -83,7 +83,18 @@ function SVGexport(){
     newdata = [] // free memory
 }
 
+
 function PNGexport(){
+
+  if (window.clusterMap == true) {
+    clustPNGexport()
+  } else {
+    mapPNGexport()
+  }
+
+}
+
+function mapPNGexport(){
 
   document.title = "Exporting plot..."
 
@@ -153,7 +164,7 @@ function PNGexport(){
     newdata = [] // free memory
 }
 
-// export overlay celles from file on density plot
+// export overlay cells from file on density plot
 function PNGoverlayExport() {
 
   var dotsize = window.dotsize0
@@ -458,6 +469,33 @@ function PNGoverlayExport() {
     
     document.title = "Single Cell Virtual Cytometer"
 
+    newdata = [] // free memory
+}
+
+function clustPNGexport(){
+  document.title = "Exporting plot..."
+
+  progBar() // progress bar
+
+  // replace scattergl by scatter for better image output
+  var dataLayout = initMapCluster('scatter')
+  var newdata = dataLayout[0]
+  var layout = dataLayout[1]
+  Plotly.purge('graphSVG')
+  Plotly.plot(
+    'graphSVG',
+    newdata,
+    layout
+     ).then(function(gd) {
+    Plotly.downloadImage(gd, {
+        format: 'png',
+        height: 1100,
+        width: 2200,
+        filename: 'newplot'
+    })
+    });
+    
+    document.title = "Single Cell Virtual Cytometer"
     newdata = [] // free memory
 }
 

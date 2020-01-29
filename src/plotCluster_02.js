@@ -1,4 +1,4 @@
-function plotCluster(ClustName, clustNB){
+function plotCluster(ClustName, clustNB, markerType){
     var colValues = window.colValues
     var xName = window.tsne1
     var yName = window.tsne2
@@ -22,7 +22,7 @@ function plotCluster(ClustName, clustNB){
         y: tsne2,
         
         hovertemplate: '<i>'+ ClustName + '</i>: ' + '<b>%{text}</b>',
-        type: 'scattergl',
+        type: markerType,
         mode: "markers" ,
         marker: {
           size: window.dotsizeTSNE,
@@ -94,6 +94,8 @@ function plotCluster(ClustName, clustNB){
       initTSNE()  // initialisation of tSNE data to avoid merging tSNE data when stack = false
       Plotly.purge('graph2');
       Plotly.react('graph2', data, layout);
+
+      return [data, layout]
 }
 
 
@@ -237,7 +239,7 @@ function median(arr) {
 // ========================================================
 
 // plot genes levels in cluster map
- function plotGene(ClustName){
+ function plotGene(ClustName, markerType){
     var colValues = window.colValues
     var xName = window.tsne1
     var yName = window.tsne2
@@ -250,7 +252,7 @@ function median(arr) {
     var trace1 = {
         x: tsne1,
         y: tsne2,
-        type: 'scattergl',
+        type: markerType,
         mode: "markers" ,
         marker: {
           size: window.dotsizeTSNE,
@@ -309,5 +311,6 @@ function median(arr) {
       initTSNE()  // initialisation of tSNE data to avoid merging tSNE data when stack = false
       Plotly.purge('graph2');
       Plotly.react('graph2', data, layout);
-  
+      
+      return [data, layout]
 }
