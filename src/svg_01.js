@@ -15,6 +15,16 @@
 //(c) Frederic Pont 2019
 
 function SVGexport(){
+  alert("SVG is better supported by Firefox. Each cell will be drawn as a circle. Exporting many cells can crash the web browser.")
+  if (window.clusterMap == true) {
+    clustSVGexport()
+  } else {
+    mapSVGexport()
+  }
+
+}
+
+function mapSVGexport(){
 
   document.title = "Exporting plot..."
 
@@ -489,6 +499,33 @@ function clustPNGexport(){
      ).then(function(gd) {
     Plotly.downloadImage(gd, {
         format: 'png',
+        height: 1100,
+        width: 2200,
+        filename: 'newplot'
+    })
+    });
+    
+    document.title = "Single Cell Virtual Cytometer"
+    newdata = [] // free memory
+}
+
+function clustSVGexport(){
+  document.title = "Exporting plot..."
+
+  progBar() // progress bar
+
+  // replace scattergl by scatter for better image output
+  var dataLayout = initMapCluster('scatter')
+  var newdata = dataLayout[0]
+  var layout = dataLayout[1]
+  Plotly.purge('graphSVG')
+  Plotly.plot(
+    'graphSVG',
+    newdata,
+    layout
+     ).then(function(gd) {
+    Plotly.downloadImage(gd, {
+        format: 'svg',
         height: 1100,
         width: 2200,
         filename: 'newplot'
