@@ -31,7 +31,7 @@ function plotCluster(ClustName, clustNB){
         text: clusterVal, // cluster nb is displayed when the mouse is over one dot
       };
 
-      var plotAnot = {}
+    var plotAnot = {}
     if (ClustCheckBox.checked == true) {
         plotAnot = {
                 x: xlabel,
@@ -51,7 +51,6 @@ function plotCluster(ClustName, clustNB){
       //setDotSize1() // set dot size of t-SNE graph
       dotsize1 = window.dotsize1
      
-      //var data = [trace1, trace2];
       var data = [trace1, plotAnot];
 
       var layout = {
@@ -95,11 +94,6 @@ function plotCluster(ClustName, clustNB){
       initTSNE()  // initialisation of tSNE data to avoid merging tSNE data when stack = false
       Plotly.purge('graph2');
       Plotly.react('graph2', data, layout);
-  
-
-     
-      //storeTSNEdata(color2, userPar1, userPar2, x2, y2, layerColor)
-
 }
 
 
