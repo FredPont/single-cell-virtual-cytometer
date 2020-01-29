@@ -295,7 +295,7 @@ function statistics() {
             `Number of cells in density plot : ${p["nbCellInPlot"]}`,
             format4Quad("Number of cells in quadrant", p["CellInQ"]),
             '',
-            `% of cells`,
+            `% of cells in density plot`,
             '----------',
             format4Quad("% cells in quadrant", p["p100CellInQ"]),
             '',

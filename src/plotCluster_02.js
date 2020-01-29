@@ -8,6 +8,10 @@ function plotCluster(ClustName, clustNB){
    
     var layerColor = ClustColors(clusterVal, clustNB)
 
+    // Get the cluster checkbox state
+    var ClustCheckBox = document.getElementById("ClustCheckBox");
+
+    // compute the center of the clusters
     clustCenter =  ClustCenters(ClustName)
     xlabel = clustCenter[0] 
     ylabel = clustCenter[1] 
@@ -27,18 +31,22 @@ function plotCluster(ClustName, clustNB){
         text: clusterVal, // cluster nb is displayed when the mouse is over one dot
       };
 
-      var plotAnot = {
-        x: xlabel,
-        y: ylabel,
-        mode: "text",
-        text: labels,
-        type: "scattergl",
-        textfont: {
-          family: 'Courier New, monospace',
-              size: 18,
-              color: '#000000'
+      var plotAnot = {}
+    if (ClustCheckBox.checked == true) {
+        plotAnot = {
+                x: xlabel,
+                y: ylabel,
+                mode: "text",
+                text: labels,
+                type: "scattergl",
+                textfont: {
+                  family: 'Courier New, monospace',
+                      size: 18,
+                      color: '#000000'
+                }
           }
-        }
+      }
+      
 
       //setDotSize1() // set dot size of t-SNE graph
       dotsize1 = window.dotsize1
