@@ -67,7 +67,14 @@ function exportQuadranCells(name) {
 function exportStatistics(name) {
 
   progBar() // progress bar
-  table = formatStat()  
+
+  var table = ""
+
+  if (window.quadran == true) {
+    table = formatQuadStat()
+  } else {
+    table = formatStat()
+  }
 
   var a = document.createElement("a");
   document.body.appendChild(a)
