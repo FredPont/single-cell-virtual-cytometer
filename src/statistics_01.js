@@ -33,32 +33,32 @@ function statistics() {
     p100plot = math.round(100 *  nbCellInPlot / totalCellNb,2)        // % cells in density plot compared to total nb of cells in t-SNE map
 
     // means
-    meanDPlotX = math.round(mean(x),2)        // mean of all cells in dentity plot in X
-    meanDPlotY = math.round(mean(y),2)        // mean of all cells in dentity plot in Y
+    meanDPlotX = math.round(mean(x),2)        // mean of all cells in density plot in X
+    meanDPlotY = math.round(mean(y),2)        // mean of all cells in density plot in Y
     meanGateX = math.round(mean(xBrush),2)    // mean of all cells in gate in X
     meanGateY = math.round(mean(yBrush),2)    // mean of all cells in gate in Y
 
     // medians
-    medianDPlotX = math.round(median(x),2)        // median of all cells in dentity plot in X
-    medianDPlotY = math.round(median(y),2)        // median of all cells in dentity plot in Y
+    medianDPlotX = math.round(median(x),2)        // median of all cells in density plot in X
+    medianDPlotY = math.round(median(y),2)        // median of all cells in density plot in Y
     medianGateX = math.round(median(xBrush),2)    // median of all cells in gate in X
     medianGateY = math.round(median(yBrush),2)    // median of all cells in gate in Y
 
     // standard deviation
-    stdDPlotX = math.round(math.std(x),2)        // std of all cells in dentity plot in X
-    stdDPlotY = math.round(math.std(y),2)        // std of all cells in dentity plot in Y
+    stdDPlotX = math.round(math.std(x),2)        // std of all cells in density plot in X
+    stdDPlotY = math.round(math.std(y),2)        // std of all cells in density plot in Y
     stdGateX = math.round(math.std(xBrush),2)    // std of all cells in gate in X
     stdGateY = math.round(math.std(yBrush),2)    // std of all cells in gate in Y
 
     // variance
-    varDPlotX = math.round(math.variance(x),2)        // var of all cells in dentity plot in X
-    varDPlotY = math.round(math.variance(y),2)        // var of all cells in dentity plot in Y
+    varDPlotX = math.round(math.variance(x),2)        // var of all cells in density plot in X
+    varDPlotY = math.round(math.variance(y),2)        // var of all cells in density plot in Y
     varGateX = math.round(math.variance(xBrush),2)    // var of all cells in gate in X
     varGateY = math.round(math.variance(yBrush),2)    // var of all cells in gate in Y
 
     // coeff variation
-    cvDPlotX = math.round(CoefVar(x),2)        // cv of all cells in dentity plot in X
-    cvDPlotY = math.round(CoefVar(y),2)        // cv of all cells in dentity plot in Y
+    cvDPlotX = math.round(CoefVar(x),2)        // cv of all cells in density plot in X
+    cvDPlotY = math.round(CoefVar(y),2)        // cv of all cells in density plot in Y
     cvGateX = math.round(CoefVar(xBrush),2)    // cv of all cells in gate in X
     cvGateY = math.round(CoefVar(yBrush),2)    // cv of all cells in gate in Y
     
@@ -128,37 +128,37 @@ function statistics() {
             `% cells in gate / number of cells in density plot :\t${p["p100GatePlot"]}`,
             '',
             `Arithmetic Means`,
-            '----------',
-            `X Mean of cells in dentity plot :\t${p["meanDPlotX"]}`,
-            `Y Mean of cells in dentity plot :\t${p["meanDPlotY"]}`,
+            '----------------',
+            `X Mean of cells in density plot :\t${p["meanDPlotX"]}`,
+            `Y Mean of cells in density plot :\t${p["meanDPlotY"]}`,
             `X Mean of cells in gate         :\t${p["meanGateX"]}`,
             `Y Mean of cells in gate         :\t${p["meanGateY"]}`,
             '',
             `Medians`,
-            '----------',
-            `X Median of  cells in dentity plot :\t${p["medianDPlotX"]}`,
-            `Y Median of  cells in dentity plot :\t${p["medianDPlotY"]}`,
+            '-------',
+            `X Median of  cells in density plot :\t${p["medianDPlotX"]}`,
+            `Y Median of  cells in density plot :\t${p["medianDPlotY"]}`,
             `X Median of  cells in gate         :\t${p["medianGateX"]}`,
             `Y Median of  cells in gate         :\t${p["medianGateY"]}`,
             '',
             `Standard deviation`,
-            '----------',
-            `X SD of cells in dentity plot :\t${p["stdDPlotX"]}`,
-            `Y SD of cells in dentity plot :\t${p["stdDPlotY"]}`,
+            '------------------',
+            `X SD of cells in density plot :\t${p["stdDPlotX"]}`,
+            `Y SD of cells in density plot :\t${p["stdDPlotY"]}`,
             `X SD of cells in gate         :\t${p["stdGateX"]}`,
             `Y SD of cells in gate         :\t${p["stdGateY"]}`,
             '',
             `Variance`,
-            '----------',
-            `X VAR of cells in dentity plot :\t${p["varDPlotX"]}`,
-            `Y VAR of cells in dentity plot :\t${p["varDPlotY"]}`,
+            '--------',
+            `X VAR of cells in density plot :\t${p["varDPlotX"]}`,
+            `Y VAR of cells in density plot :\t${p["varDPlotY"]}`,
             `X VAR of cells in gate         :\t${p["varGateX"]}`,
             `Y VAR of cells in gate         :\t${p["varGateY"]}`,
             '',
             `Coefficient of Variation`,
-            '----------',
-            `CV of X cells in dentity plot :\t${p["cvDPlotX"]}`,
-            `CV of Y cells in dentity plot :\t${p["cvDPlotY"]}`,
+            '------------------------',
+            `CV of X cells in density plot :\t${p["cvDPlotX"]}`,
+            `CV of Y cells in density plot :\t${p["cvDPlotY"]}`,
             `CV of X cells in gate         :\t${p["cvGateX"]}`,
             `CV of Y cells in gate         :\t${p["cvGateY"]}`,
     ].join('\n');
@@ -296,31 +296,31 @@ function statistics() {
             format4Quad("Number of cells in quadrant", p["CellInQ"]),
             '',
             `% of cells in density plot`,
-            '----------',
+            '--------------------------',
             format4Quad("% cells in quadrant", p["p100CellInQ"]),
             '',
             `Arithmetic Means`,
-            '----------',
+            '----------------',
             format4Quad("X Mean of cells in quadrant", p["meanQuadX"]),
             format4Quad("Y Mean of cells in quadrant", p["meanQuadY"]),
             '',
             `Medians`,
-            '----------',
+            '-------',
             format4Quad("X Median of  cells in quadrant", p["medianQuadX"]),
             format4Quad("Y Median of  cells in quadrant", p["medianQuadY"]),
             '',
             `Standard deviation`,
-            '----------',
+            '------------------',
             format4Quad("X SD of cells in quadrant", p["stdQuadX"]),
             format4Quad("Y SD of cells in quadrant", p["stdQuadY"]),
             '',
             `Variance`,
-            '----------',
+            '--------',
             format4Quad("X VAR of cells in quadrant", p["varQuadX"]),
             format4Quad("Y VAR of cells in quadrant", p["varQuadY"]),
             '',
             `Coefficient of Variation`,
-            '----------',
+            '------------------------',
             format4Quad("CV of X cells in quadrant", p["cvQuadX"]),
             format4Quad("CV of Y cells in quadrant", p["cvQuadY"])
     ].join('\n');
