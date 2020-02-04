@@ -1,4 +1,6 @@
 function plotCluster(ClustName, clustNB, markerType){
+    document.title = "updating..."
+    progBar() // progress bar
     var colValues = window.colValues
     var xName = window.tsne1
     var yName = window.tsne2
@@ -94,7 +96,7 @@ function plotCluster(ClustName, clustNB, markerType){
       initTSNE()  // initialisation of tSNE data to avoid merging tSNE data when stack = false
       Plotly.purge('graph2');
       Plotly.react('graph2', data, layout);
-
+      document.title = "Single Cell Virtual Cytometer"
       return [data, layout]
 }
 
@@ -240,6 +242,8 @@ function median(arr) {
 
 // plot genes levels in cluster map
  function plotGene(ClustName, markerType){
+    document.title = "updating..."
+    progBar() // progress bar
     var colValues = window.colValues
     var xName = window.tsne1
     var yName = window.tsne2
@@ -311,6 +315,6 @@ function median(arr) {
       initTSNE()  // initialisation of tSNE data to avoid merging tSNE data when stack = false
       Plotly.purge('graph2');
       Plotly.react('graph2', data, layout);
-      
+      document.title = "Single Cell Virtual Cytometer"
       return [data, layout]
 }
