@@ -24,6 +24,7 @@ function quadranGate(){
       document.getElementById("quadgate").classList.add('is-primary')
       window.quadran = true
       showData()
+      
     } else {
       document.getElementById("quadgate").value="Quadrants Off";
       document.getElementById("quadgate").innerText="Quadrants Off";
@@ -105,7 +106,7 @@ function quadSplit(xClic,yClic) {
 
     densityPlotQuadran(x,y,window.userPar1,window.userPar2,color1, 'densplot', xClic, yClic, Qprop, Qx, Qy)
     document.title = "Single Cell Virtual Cytometer"
-
+    unClickQuadrantBut()    // set the quadrant button to off when drawing quadrant is achieved
     return
 }
 

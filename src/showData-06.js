@@ -30,6 +30,7 @@
     initOverlay() // initialisation of overlay xy coordinates + enable the overlay button
     //enableOverlayFileBut()
     initQuadran() // initialisation of quadran colors and coordinates
+    
     document.title = "updating..."
 
     var colValues = window.colValues
