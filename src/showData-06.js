@@ -80,6 +80,7 @@
         return
       }
 
+      enableGateOnBut() // enable button Gate Only Off 
       document.title = "updating..."
       
       var nbCells = 0

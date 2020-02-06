@@ -58,6 +58,19 @@ function initQuadran() {
 }
 
 
+
+// enable button Gate Only Off 
+function enableGateOnBut() {
+    onoffBut = document.getElementById('onoff')
+    onoffBut.disabled = false
+}
+
+// disable button Gate Only Off 
+function disableGateOnBut() {
+    onoffBut = document.getElementById('onoff')
+    onoffBut.disabled = true
+}
+
 // enable button overlay cells from file
 function enableOverlayFileBut() {
     overBut = document.getElementById('overlayCells')
@@ -97,6 +110,10 @@ function initMapCluster(markerType) {
     var ClustName = e.options[e.selectedIndex].value;
     var e2 = document.getElementById("clusterNB");
     var clustNB = e2.value;
+
+    disableFRZG()       // disable button Freeze Gate
+    disableGateOnBut()  // disable button Gate Only Off 
+
     //console.log(ClustName, clustNB)
     if (clustNB == ""){
         clustNB = -1    // to display all the clusters
@@ -111,7 +128,7 @@ function initMapCluster(markerType) {
     } else {
         dataLayout = plotGene(ClustName, markerType)    // plot the map with genes/other columns values
     }
-
+    initMapXY()
     return dataLayout
 }
 
