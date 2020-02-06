@@ -55,19 +55,9 @@ function initQuadran() {
     window.QuadPerCentage = []  // percentage of cells in each quadran
     window.quadranX = []        // x coordinates of Q1-Q4
     window.quadranY = []        // y coordinates of Q1-Q4
-    
 }
 
-// set the quadrant button to off when drawing quadrant is achieved 
-function unClickQuadrantBut() {
-    currentvalue = document.getElementById('quadgate').value;
-    if (currentvalue == "Quadrants On"){
-        document.getElementById("quadgate").value="Quadrants Off";
-        document.getElementById("quadgate").innerText="Quadrants Off";
-        document.getElementById("quadgate").classList.remove('is-primary')
-        window.quadran = false
-    }
-}
+
 
 // enable button Gate Only Off 
 function enableGateOnBut() {
