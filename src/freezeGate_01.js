@@ -40,4 +40,5 @@ function enableFRZG() {
 function disableFRZG() {
     fzgBut = document.getElementById('fzgate')
     fzgBut.disabled = true
+    unClickFreezeGate()
 }

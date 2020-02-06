@@ -57,7 +57,16 @@ function initQuadran() {
     window.quadranY = []        // y coordinates of Q1-Q4
 }
 
-
+// set the freeze gate button to off
+function unClickFreezeGate() {
+    currentvalue = document.getElementById('fzgate').value;
+    if (currentvalue == "Freeze Gate On"){
+        document.getElementById("fzgate").value="Freeze Gate Off";
+        document.getElementById("fzgate").innerText="Freeze Gate Off";
+        document.getElementById("fzgate").classList.remove('is-primary')
+        window.quadran = false
+    }
+}
 
 // enable button Gate Only Off 
 function enableGateOnBut() {
@@ -69,6 +78,7 @@ function enableGateOnBut() {
 function disableGateOnBut() {
     onoffBut = document.getElementById('onoff')
     onoffBut.disabled = true
+    disableFRZG()
 }
 
 // enable button overlay cells from file
