@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Single Cell Virtual Cytometer</title>
+    <link rel="stylesheet" href="src/bulma-0.8.2/css/bulma.min.css">
+    <link rel="stylesheet" href="src/scvirtualCyto.css">
+    <script src="src/read_text-10.js"> </script>
+    <script src="src/showData-06.js"></script>
+    <script src="src/plotly1.53.js"></script>
+    <script src="src/findIndex-01.js"></script>
+    <script src="src/write_data_01.js"></script>
+    <script src="src/cumulGate_01.js"></script>
+    <script src="src/densityPlot_01.js"></script>
+    <script src="src/stack_01.js"></script>
+    <script src="src/init_01.js"></script>
+    <script src="src/svg_01.js"></script>
+    <script src="src/freezeGate_01.js"></script>
+    <script src="src/overlayCells-01.js"></script>
+    <script src="src/quadrantsGate_01.js"></script>
+    <script src="src/plotCluster_02.js"></script>
+    <script src="src/statistics_01.js"></script>
+    <script src="src/math.min.js"></script>
+</head>
+
+<body>
+    <div class="columns">
+            <div class="column is-narrow">
+                <div class="box" style="width: 200px;">
+                    <figure class="image is-4by1">
+                    <img src="src/logo.png">
+                    </figure>
+                </div>
+            </div>
+    </div>
+        
+        
+    <div class="tile is-ancestor" style="margin:10px;">
+        <div class="tile is-vertical">
+            <div class="tile">
+                <div class="tile">
+                    <div class="field">
+                        <div class="file is-primary" style="margin-left: 10px">
+                            <label class="file-label">
+                                <input class="file-input" id='input_file' type="file" name="resume" accept='text/plain, .csv, .tsv' onchange='openFile()'>
+                                <span class="file-cta">
+                                    <span class="file-icon">
+                                        <i class="fas fa-upload"></i>
+                                    </span>
+                                    <span class="file-label">
+                                        Open file…
+                                    </span>
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="tile">
+                    <div class="field">
+                        <div class="file is-primary" style="margin-left: 10px">
+                            <label class="file-label">
+                                <input class="file-input" id='overlayCells' type="file" accept='text/plain, .csv, .tsv' onchange='overlayFile()' disabled>
+                                <span class="file-cta">
+                                    <span class="file-icon">
+                                        <i class="fas fa-upload"></i>
+                                    </span>
+                                    <span class="file-label">
+                                        Overlay Cells from file…
+                                    </span>
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="tile">
+                    <progress style="visibility: hidden" class="progress is-info" id="pb1" max="100">15%</progress>
+                </div>
+                <div class="tile">
+                    <p class="content" id ="filename" style="margin:10px;"> Single Cell Virtual Cytometer</p>
+                </div>
+            </div>
+            <div class="tile">
+
+                <div class="tile box tile_box_style" style="margin: 10px">
+                    <div id="densplot"></div>
+                </div>
+                <div class="tile box tile_box_style"  style="margin: 10px">
+                    <div id="graph2">
+                        <!-- t-SNE plot -->
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="tile" style="margin: 10px">
+                <div class="field">     
+                    <div class="control">
+                        <div class="select">
+                            <form name="FormP1">
+                                <select id="ListeP1" onchange="showData();">
+                                    <option SELECTED>-- Select value --</option>
+                                </select>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="field">
+                 
+                    <div class="control">
+                        <div class="select">
+                            <form name="FormP2">
+                                <select id="ListeP2" onchange="showData();">
+                                    <option SELECTED>-- Select value --</option>
+                                </select>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="field">
+                 
+                    <div class="control">
+                        <div class="select">
+                            <form name="FormP3">
+                                <select id="Xmap" onchange="initMapXY();">
+                                    <option SELECTED>-- Select X --</option>
+                                </select>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="field">
+                 
+                    <div class="control">
+                        <div class="select">
+                            <form name="FormP4">
+                                <select id="Ymap" onchange="initMapXY();">
+                                    <option SELECTED>-- Select Y --</option>
+                                </select>
+                            </form>
+                        </div>
+                    </div>
+                </div> 
+                <div class="field">
+                 
+                    <div class="control">
+                        <div class="select">
+                            <form name="FormP5">
+                                <select id="Cluster" onclick="initMapCluster('scattergl');">
+                                    <option SELECTED>-- Select cluster --</option>
+                                </select>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="control">
+                      <input class="input is-primary" type="text" id="clusterNB" placeholder="cluster to display" onchange="initMapCluster();">
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="checkbox">
+                    <input type="checkbox" checked="checked" id="ClustCheckBox" onclick="">
+                     Show Cluster #
+                  </label>
+                </div>
+            </div>
+            <div class="tile box tile_box_style">
+                <div class="tile">
+                    <div class="field">
+                        <label class="label">Dot size</label>
+                        <div class="control">
+                            <div class="select" onclick="setDotSize0();">
+                                <select id="dotSize0">
+                                    <option value="1">1</option>
+                                    <option value="2" selected="selected">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tile button_container">
+                        <a class="button is-info" id="deltrace" style="background: rgb(205, 139, 218);" onclick="deleteTrace()">Delete Trace</a>
+                        <button class="button" value="Gate Only Off" id="onoff" onclick="cumGate();"  disabled>Gate Only Off</button>
+                        <button class="button" value="Freeze Gate Off" id="fzgate" onclick="frzGate();"  disabled>Freeze Gate Off</button>
+                        <button class="button" value="Quadrants Off" id="quadgate" onclick="quadranGate();"  disabled>Quadrants Off</button>
+                        <a class="button is-warning" id="PNGoverlay" onclick="PNGoverlayExport();">PNG</a>
+                        <a class="button is-info" id="SVGoverlay" onclick="SVGoverlayExport();">SVG</a>
+                        <a class="button is-info" style="background: rgb(80, 200, 230);" onclick="exportQuadranCells('quadrants.csv');">Export Quadrant</a>
+                        <a class="button is-info" style="background: rgb(80, 200, 230);" onclick="exportStatistics('stats.txt');">Export Stats</a>
+                    </div>
+            </div>
+                <div class="tile">
+                    <div class="field">
+                        <label class="label">Dot size</label>
+                        <div class="control">
+                            <div class="select" onclick="setDotSize1();">
+                                <select id="dotSize1">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4" selected="selected">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label class="label">Map Dot size</label>
+                        <div class="control">
+                            <div class="select" onclick="setDotSizeTSNE();">
+                                <select id="dotSizeTSNE">
+                                    <option value="1">1</option>
+                                    <option value="2" selected="selected">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tile button_container">
+                        <a class="button is-info" id="deltrace" style="background: rgb(205, 139, 218);" onclick="deleteTracetSNE()">Delete Trace</a>
+                        <a class="button is-info" style="background: rgb(80, 200, 230);" onclick="upload('myfilename.txt');">Export Cells</a>
+                        <button class="button" value="Stack Off" id="stackButton" onclick="stackTrace();">Stack Off</button>
+                        <a class="button is-info" id="saveSVG" onclick="SVGexport();">SVG</a>
+                        <a class="button is-warning" id="savePNG" onclick="PNGexport();">PNG</a>
+                    </div>  
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container">
+        <div id="graphSVG" style="padding:10px 50px;">
+            <!-- invisible t-SNE plot -->
+        </div>
+    </div>
+    <script>
+        document.getElementById("graphSVG").style.visibility = "hidden";       
+    </script>
+</body>
+
+</html>
