@@ -28,7 +28,7 @@
     
 
     initOverlay() // initialisation of overlay xy coordinates + enable the overlay button
-    //enableOverlayFileBut()
+    
     initQuadran() // initialisation of quadran colors and coordinates
     document.title = "updating..."
 
@@ -47,6 +47,7 @@
             x1 = gate[userPar1]
             y1 = gate[userPar2]  
         } else {
+          //console.log("activation of gatePts")
             gatePts()
             var gate = window.gate
             x1 = gate[userPar1]
@@ -96,9 +97,9 @@
       selCellNames = selectedCellNames(x, y, x1, y1)
       window.selCellNames = selCellNames
 
-      //console.log(window.selCellNames)
-      //console.log(window.gateCellNames)
-
+      // update the gate with brushed dots
+      gatePts()
+      
       // dictionnary cellNames => [tSNE1,tSNE2]
       CellstSNE = window.CellstSNE
 
