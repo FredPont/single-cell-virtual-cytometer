@@ -14,7 +14,7 @@
 // Written by Frederic PONT.
 //(c) Frederic Pont 2019
 
-//fzgate Freeze Gate 
+//fzgate Freeze Gate : set button on / off
 function frzGate(){
     currentvalue = document.getElementById('fzgate').value;
     

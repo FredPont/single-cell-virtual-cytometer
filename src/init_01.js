@@ -121,6 +121,13 @@ function initMapCluster(markerType) {
     var e2 = document.getElementById("clusterNB");
     var clustNB = e2.value;
 
+    // if no cluster or parameter is selected, window.clusterMap = false
+    
+    if (ClustName == "-- Select cluster --"){
+        window.clusterMap = false
+        return
+    }
+
     disableFRZG()       // disable button Freeze Gate
     disableGateOnBut()  // disable button Gate Only Off 
 

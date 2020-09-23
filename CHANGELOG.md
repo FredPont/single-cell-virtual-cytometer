@@ -1,5 +1,12 @@
 ## V 2020-05-05
 
+*22 september 2020*
+
+- Bug fix : button "FreezeGate" was not working correctly
+- Bug fix : button dot size
+- libraries update : plotly, math and Bulma
+- documentation update
+
 *11 may 2020*
 
 - Bug fix : brushed cells were not selected in the 2nd gate level when the button "FreezeGate" was disabled

@@ -43,6 +43,7 @@
 
     if (window.cumulGate == true) {
         if (window.freezeGate == true) {
+          //console.log("activated freezegate")
             var gate = window.gate
             x1 = gate[userPar1]
             y1 = gate[userPar2]  
@@ -97,8 +98,10 @@
       selCellNames = selectedCellNames(x, y, x1, y1)
       window.selCellNames = selCellNames
 
-      // update the gate with brushed dots
-      gatePts()
+      // update the gate with brushed dots if freeze gate is not enabled
+      if (window.freezeGate == false) {
+        gatePts()
+      }
       
       // dictionnary cellNames => [tSNE1,tSNE2]
       CellstSNE = window.CellstSNE
@@ -325,8 +328,10 @@ function refreshTSNE(){
     
   };
 
-  //
+  // if the tSNEmap has been built wih the density plot then the dot size of the tsne is obtained
   data[0].marker.size = tSNEdotsize;
+
+  
   // change dot size for all data except t-SNE
   var L = data.length
   for (let i = 1; i < L; i++) {
@@ -376,7 +381,13 @@ function setDotSize1() {
   var e = document.getElementById("dotSize1");
   var dotsize1 = e.options[e.selectedIndex].value;
   window.dotsize1 = dotsize1 
-  refreshTSNE()
+  // if the tSNEmap has been built wih the density plot then the dot size of the tsne is obtained
+  // if no tsne map already exist dotsize1 is ignored
+  if (window.tSNEdata.length > 0) {
+     refreshTSNE()
+  }
+
+ 
 }
 
 // dot size of  all cells tSNE
