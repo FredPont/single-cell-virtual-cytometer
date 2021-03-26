@@ -1,5 +1,11 @@
 ## V 2020-05-05
 
+*26 march 2021*
+
+- Improve manual
+- update plotly -> 1.58.4
+- update bulma -> 0.9.2
+
 *22 september 2020*
 
 - Bug fix : button "FreezeGate" was not working correctly
