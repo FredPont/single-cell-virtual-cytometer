@@ -194,7 +194,7 @@ function overlayPlotDensity(x,y) {
 
 
     densplot = document.getElementById('densplot');
-    Plotly.purge(densplot); // clear plot density
+    // Plotly.purge(densplot); // clear plot density . purge done already in densityPlot()
     // coordinate of active plot density
     x1 = window.densityPlot.activeX
     y1 = window.densityPlot.activeY
@@ -202,7 +202,9 @@ function overlayPlotDensity(x,y) {
     userPar2 = window.userPar2
 
     densityPlot(x1,y1,userPar1,userPar2, 'rgb(182, 177, 188)', 'densplot')
-    Plotly.plot(densplot, [trace1], layout)
+    //Plotly.plot(densplot, [trace1], layout)
+    //Plotly.react(densplot, [trace1], layout, {responsive: true})
+    Plotly.addTraces(densplot, [trace1])
 }
 
 // calculate t-SNE coordinates of overlay cells

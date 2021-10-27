@@ -77,7 +77,7 @@ function mapSVGexport(){
   newdata = removeScatterGL(data)
   
   Plotly.purge('graphSVG')
-  Plotly.plot(
+  Plotly.newPlot(
     'graphSVG',
     newdata,
     layout
@@ -121,8 +121,15 @@ function mapPNGexport(){
   var tsne2 = colValues[yName]
 
   // number of cells in last gate :
-  let cellsInGate = window.selCellNames.length
-  let cellsInGatep100 = math.round(100 * cellsInGate / window.totalCells, 1)
+  let cellsInGate = 0
+  let cellsInGatep100 = 0.
+  let legend = ""
+  if (window.selCellNames != undefined){
+    cellsInGate = window.selCellNames.length
+    cellsInGatep100 = math.round(100 * cellsInGate / window.totalCells, 1)
+    legend = 'Gated ' + cellsInGate  + ' cells (' + cellsInGatep100 + '%)' // print number of cells in last gate
+  }
+  
 
   var layout = {
     width: 1100,
@@ -165,7 +172,7 @@ function mapPNGexport(){
       xanchor: 'right',
       y: 0.05,
       yanchor: 'bottom',
-      text: 'Gated ' + cellsInGate  + ' cells (' + cellsInGatep100 + '%)' , // print number of cells in last gate
+      text: legend, // print number of cells in last gate
         font: {
           family: 'Courier New, monospace',
           size: 16,
@@ -178,7 +185,7 @@ function mapPNGexport(){
   // replace scattergl by scatter for better image output
   newdata = removeScatterGL(data)
   Plotly.purge('graphSVG')
-  Plotly.plot(
+  Plotly.newPlot(
     'graphSVG',
     newdata,
     layout
@@ -485,7 +492,7 @@ function PNGoverlayExport() {
 
   //densplot = document.getElementById('graphSVG');
   Plotly.purge('graphSVG')
-  Plotly.plot(
+  Plotly.newPlot(
     'graphSVG',
     newdata,
     layout
@@ -793,7 +800,7 @@ function SVGoverlayExport() {
 
   //densplot = document.getElementById('graphSVG');
   Plotly.purge('graphSVG')
-  Plotly.plot(
+  Plotly.newPlot(
     'graphSVG',
     newdata,
     layout
@@ -821,7 +828,7 @@ function clustPNGexport(){
   var newdata = dataLayout[0]
   var layout = dataLayout[1]
   Plotly.purge('graphSVG')
-  Plotly.plot(
+  Plotly.newPlot(
     'graphSVG',
     newdata,
     layout
@@ -953,7 +960,7 @@ function QuadMapPNGexport(){
   // replace scattergl by scatter for better image output
   newdata = removeScatterGL(data)
   Plotly.purge('graphSVG')
-  Plotly.plot(
+  Plotly.newPlot(
     'graphSVG',
     newdata,
     layout
@@ -980,7 +987,7 @@ function clustSVGexport(){
   var newdata = dataLayout[0]
   var layout = dataLayout[1]
   Plotly.purge('graphSVG')
-  Plotly.plot(
+  Plotly.newPlot(
     'graphSVG',
     newdata,
     layout

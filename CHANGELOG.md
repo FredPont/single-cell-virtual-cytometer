@@ -1,4 +1,16 @@
-## V 2020-05-05
+## V 2021-10-27
+
+*27 october 2021*
+
+- update code. Improvments image exportation
+- update plotly -> 2.5.1
+- update bulma -> 0.9.3
+
+*26 march 2021*
+
+- Improve manual
+- update plotly -> 1.58.4
+- update bulma -> 0.9.2
 
 *22 september 2020*
 

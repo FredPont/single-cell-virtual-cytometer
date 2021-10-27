@@ -207,12 +207,15 @@ function plotTSNE(colValues, color2, userPar1, userPar2, x2, y2, legend){
       if (window.stack == true) {
         // when window.stackNB == 1 the tSNE is plotted in grey one time with the 1st quadran
         // then the next 3 quadrants are ploted alone
-        if(window.quadran == true && window.cumulGate == true && window.stackNB == 1){
+        //if(window.quadran == true && window.cumulGate == true && window.stackNB == 1){
+        if(window.quadran == true && window.stackNB == 1){
           // plot trace1 = tSNE + trace2 = 1st quadrant
-          Plotly.plot('graph2', [trace1, trace2], layout);
+          // Plotly.plot('graph2', [trace1, trace2], layout);
+          Plotly.react('graph2', [trace1, trace2], layout);
           window.stackNB++
         } else {
-          Plotly.plot('graph2', [trace2], layout);
+          // Plotly.plot('graph2', [trace2], layout);
+          Plotly.addTraces('graph2', [trace2]);
           window.stackNB++
         }
           
