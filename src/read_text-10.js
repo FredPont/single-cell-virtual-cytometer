@@ -39,7 +39,7 @@ var openFile = function() {
             var fileLines = text.split("\n")        // array of all lines
             var fileLength = fileLines.length
             var header = fileLines[0].split("\t")   // column names
-            header = shortColNames(header, 40)      // short colnames
+            header = shortColNames(header, 25)      // short colnames
             var headerLength = header.length
             col1 = header[0]
        

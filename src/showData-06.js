@@ -133,6 +133,8 @@ function plotTSNE(colValues, color2, userPar1, userPar2, x2, y2, legend){
     var tsne1 = colValues[xName]
     var tsne2 = colValues[yName]
     var layerColor = genColors()
+    // Get the cluster checkbox state
+    var showLegendtsne = document.getElementById("ShowLegendtsne");
     
 
     if (legend == "") {
@@ -194,7 +196,7 @@ function plotTSNE(colValues, color2, userPar1, userPar2, x2, y2, legend){
             }
           }
         },
-        showlegend: true,
+        showlegend: showLegendtsne.checked,
         legend: {
           x: 1.0,
           y: 1.3
@@ -282,6 +284,8 @@ function storeTSNEdata(color2, userPar1, userPar2, x2, y2, layerColor) {
 function refreshTSNE(){
 
   document.title = "updating..."
+  // Get the cluster checkbox state
+  var showLegendtsne = document.getElementById("ShowLegendtsne");
 
   progBar() // progress bar
   
